@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Effect</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+        }
+        .typing-container {
+            background-color: black;
+            color: white;
+            font-family: monospace;
+            font-size: 18px;
+            padding: 20px;
+            border-radius: 10px;
+            white-space: pre-line;
+            width: fit-content;
+            min-width: 300px;
+        }
+        .keyword { color: #569CD6; } /* Azul para palavras-chave */
+        .variable { color: #9CDCFE; } /* Azul claro para variáveis */
+        .string { color: #CE9178; } /* Laranja para strings */
+        .link { color: rgb(3, 255, 255); text-decoration: underline; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="typing-container" id="typing"></div>
+    <script>
+        let profissao = 'Dev front-end';
+        let idade = 28;
+        let xp = 'Júnior';
+        
+        let informacoes = {
+            whats: 11961802437,
+            github: 'https://teste.com.br',
+            linkedin: 'https://teste.com.br',
+            CV: 'https://teste.com.br'
+        };
+
+        let texto = `<span class='keyword'>let</span> <span class='variable'>profissão</span> = <span class='string'>'${profissao}'</span>\n`
+                   + `<span class='keyword'>let</span> <span class='variable'>idade</span> = <span class='string'>${idade}</span>\n`
+                   + `<span class='keyword'>let</span> <span class='variable'>xp</span> = <span class='string'>'${xp}'</span>\n\n`
+                   + `<span class='keyword'>let</span> <span class='variable'>informacoes</span> = {\n`
+                   + `    whats: <span class='string'>${informacoes.whats}</span>,\n`
+                   + `    gitHub: <a class='link' href='${informacoes.github}' target='_blank'>${informacoes.github}</a>,\n`
+                   + `    linkedIn: <a class='link' href='${informacoes.linkedin}' target='_blank'>${informacoes.linkedin}</a>,\n`
+                   + `    CV: <a class='link' href='${informacoes.CV}' target='_blank'>${informacoes.CV}</a>\n};`;
+        
+        let container = document.getElementById("typing");
+        let index = 0;
+
+        function typeEffect() {
+            container.innerHTML = "";
+            function addChar() {
+                if (index < texto.length) {
+                    container.innerHTML = texto.substring(0, index + 1);
+                    index++;
+                    requestAnimationFrame(addChar);
+                } else {
+                    container.innerHTML = texto;
+                }
+            }
+            addChar();
+        }
+
+        typeEffect();
+    </script>
+</body>
+</html>
